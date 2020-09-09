@@ -1,0 +1,51 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<h1>User info</h1>
+
+
+
+
+<h2>New Book</h2>
+
+<%= form_for (@book) do |b| %>
+
+<% if @book.errors.any? %>
+  <div>
+    <ul style="color: red">
+      <% @book.errors.full_messages.each do |message| %>
+        <li>error : <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+	<h4>Title</h4>
+	<%= b.text_field :title %>
+	<h4>Opinion</h4>
+	<%= b.text_area :body %>
+	<%= b.submit "Create Book" %>
+<% end %>
+
+
+
+<h1>Book detail</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Opinion</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr>
+				<td><%= link_to book_path(@book) do %><%= @book.title %><% end %></td>
+				<td><%= @book.body %></td>
+				<td><%= link_to "Edit" , edit_book_path(@book) %></td>
+				<td><%= link_to "Destroy" , book_path(@book), method: :delete , "data-confirm" => "本当に削除しますか？" %></td>
+			</tr>
+	</tbody>
+</table>
+

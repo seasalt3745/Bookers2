@@ -1,0 +1,67 @@
+
+<% if controller.controller_name == "devise/registrations" %>
+  <% case controller.action_name %>
+	<% when "new" %>
+		<p>"Welcome! You have signed up successfully."</p>
+	<% end %>
+<% end %>
+
+<h1>User info</h1>
+
+<div class="profile-container">
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+	<table class="table table-striped">
+	  <tr>
+	    <td><h3 class="profile-name"><%= @user.name %></h3></td>
+	    <td><h3>introduction</h3></td>
+	  </tr>
+	</table>
+	  <% if @user.id == current_user.id %>
+	    <p><%= link_to "プロフィール編集", edit_user_path(@user), class: "pull-right" %></p>
+	  <% end %>
+</div>
+
+
+<h2>New Book</h2>
+
+<%= form_for (@book) do |b| %>
+
+<% if @book.errors.any? %>
+  <div>
+    <ul style="color: red">
+      <% @book.errors.full_messages.each do |message| %>
+        <li>error : <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+	<h4>Title</h4>
+	<%= b.text_field :title %>
+	<h4>Opinion</h4>
+	<%= b.text_area :body %>
+	<%= b.submit "Create Book" %>
+<% end %>
+
+
+
+<h1>Books</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Opinion</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @books.each do |b| %>
+			<tr>
+				<td><%= link_to book_path(b.id) do %><%= b.title %><% end %></td>
+				<td><%= b.body %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= paginate @books %>
