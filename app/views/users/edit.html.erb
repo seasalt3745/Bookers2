@@ -1,3 +1,8 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+
 <h1>User info</h1>
 	<%= form_for(@user) do |f| %>
       <div class="form-group has-icon">

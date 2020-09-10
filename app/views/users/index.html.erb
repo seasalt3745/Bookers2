@@ -1,13 +1,5 @@
-
-<% if controller.controller_name == "devise/registrations" %>
-  <% case controller.action_name %>
-	<% when "new" %>
-		<p>"Welcome! You have signed up successfully."</p>
-	<% end %>
-<% end %>
-
-<% if flash[:notice] %> 
-  <p><%= flash[:notice] %></p> 
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
 <% end %>
 
 <div class="container">
@@ -19,8 +11,12 @@
   <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
 	<table class="table table-striped">
 	  <tr>
-	    <td><h3 class="profile-name"><%= @user.name %></h3></td>
-	    <td><h3>introduction</h3></td>
+	    <td><h4>name</h4></td>
+	    <td><h4><%= @user.name %></h4></td>
+	  </tr>
+	  <tr>
+	    <td><h4>introduction</h4></td>
+	    <td><h4><%= @user.introduction %></h4></td>
 	  </tr>
 	</table>
 	  <% if @user.id == current_user.id %>
@@ -31,7 +27,7 @@
 
 <h2>New book</h2>
 
-<%= form_for (@book) do |b| %>
+<%= form_for(@book) do |b| %>
 
 <% if @book.errors.any? %>
   <div>
@@ -52,28 +48,28 @@
 </div>
 
 <div class="col-xs-9">
-<h1>Books</h1>
+<h1>Users</h1>
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Image</th>
-			<th>Title</th>
-			<th>Opinion</th>
+			<th>Name</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<% @books.each do |b| %>
+		<% @users.each do |u| %>
 			<tr>
-				<td><%= link_to user_path(b.user) do %><%= attachment_image_tag b.user, :profile_image, :fill, 50, 50, format: 'jpeg', class: " pull-left profile-img", fallback: "no_image.jpg", size:'50x50' %><% end %></td>
-				<td><%= link_to book_path(b.id) do %><%= b.title %><% end %></td>
-				<td><%= b.body %></td>
+				<td><%= attachment_image_tag u, :profile_image, :fill, 50, 50, format: 'jpeg', class: " pull-left profile-img", fallback: "no_image.jpg", size:'50x50' %></td>
+				<td><%= link_to user_path(u.id) do %><%= u.name %><% end %></td>
+				<td><%= link_to user_path(u.id) do %>Show<% end %></td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
 
-<%= paginate @books %>
+<%= paginate @users %>
 </div>
 </div>
 </div>
