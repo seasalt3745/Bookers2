@@ -19,8 +19,12 @@
   <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
 	<table class="table table-striped">
 	  <tr>
-	    <td><h3 class="profile-name"><%= @user.name %></h3></td>
-	    <td><h3>introduction</h3></td>
+	    <td><h4>name</h4></td>
+	    <td><h4><%= current_user.name %></h4></td>
+	  </tr>
+	  <tr>
+	    <td><h4>introduction</h4></td>
+	    <td><h4><%= current_user.introduction %></h4></td>
 	  </tr>
 	</table>
 	  <% if @user.id == current_user.id %>

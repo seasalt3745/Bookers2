@@ -8,19 +8,19 @@
 <h1>User info</h1>
 
 <div class="profile-container">
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+  <%= attachment_image_tag @booker.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
 	<table class="table table-striped">
 	  <tr>
 	    <td><h4>name</h4></td>
-	    <td><h4><%= @user.name %></h4></td>
+	    <td><h4><%= @booker.user.name %></h4></td>
 	  </tr>
 	  <tr>
 	    <td><h4>introduction</h4></td>
-	    <td><h4><%= @user.introduction %></h4></td>
+	    <td><h4><%= @booker.user.introduction %></h4></td>
 	  </tr>
 	</table>
-	  <% if @user.id == current_user.id %>
-	    <%= link_to edit_user_path(current_user) do %><i class="glyphicon glyphicon-wrench"></i><% end %>
+ 	  <% if @booker.user.id == current_user.id %>
+	    <%= link_to edit_user_path(@user) do %><i class="glyphicon glyphicon-wrench"></i><% end %>
 	  <% end %>
 </div>
 
