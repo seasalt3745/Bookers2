@@ -7,15 +7,15 @@
 
 <%= form_for(@book) do |b| %>
 
-<% if @book.errors.any? %>
-  <div>
-    <ul style="color: red">
-      <% @book.errors.full_messages.each do |message| %>
-        <li>error : <%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+  <% if @book.errors.any? %>
+    <div>
+      <ul style="color: red">
+        <% @book.errors.full_messages.each do |message| %>
+          <li>error : <%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <h4>Title</h4>
   <%= b.text_field :title %>
